@@ -24,7 +24,7 @@ public class DisciplinController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<DisciplinDtoResponse> getPetsById(@PathVariable Integer id) {
+    public ResponseEntity<DisciplinDtoResponse> getDisciplinById(@PathVariable Integer id) {
         return ResponseEntity.ok(disciplinService.getDisciplinById(id));
     }
 

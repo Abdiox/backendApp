@@ -1,6 +1,7 @@
 package dat3.project.api;
 
 
+import dat3.project.dto.DisciplinDtoResponse;
 import dat3.project.dto.ParticipantDtoRequest;
 import dat3.project.dto.ParticipantDtoResponse;
 import dat3.project.service.ParticipantService;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/participants")
@@ -19,14 +21,16 @@ public class ParticipantController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ParticipantDtoResponse>> getAllParticipants() {
-        return ResponseEntity.ok(participantService.getAllParticipants());
+    public ResponseEntity<List> getAllParticipants() {
+        List<ParticipantDtoResponse> participants = participantService.getAllParticipants();
+        return ResponseEntity.ok(participants);
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<ParticipantDtoResponse> getParticipantById(@PathVariable Integer id) {
+    public ResponseEntity<ParticipantDtoResponse> getParticipantsById(@PathVariable Integer id) {
         return ResponseEntity.ok(participantService.getParticipantById(id));
     }
+
 
     @PostMapping
     public ResponseEntity<ParticipantDtoResponse> addParticipant(@RequestBody ParticipantDtoRequest request) {
