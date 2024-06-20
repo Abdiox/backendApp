@@ -21,11 +21,11 @@ public class Result {
     private ResultType resultType;
 
     @ManyToOne
-    @JoinColumn(name = "disciplin_id", nullable = false)
+    @JoinColumn(name = "disciplin_id")
     private Disciplin disciplin;
 
     @ManyToOne
-    @JoinColumn(name = "participant_id", nullable = false)
+    @JoinColumn(name = "participant_id")
     private Participant participant;
 
     public Result() {
@@ -38,6 +38,4 @@ public class Result {
         this.disciplin = disciplin;
         this.participant = participant;
     }
-
-    // Getters and setters
 }

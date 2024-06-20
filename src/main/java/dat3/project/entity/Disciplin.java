@@ -15,18 +15,12 @@ public class Disciplin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String name;
-
-    @Enumerated(EnumType.STRING)
     private DisciplineType disciplineType;
-
-    @Enumerated(EnumType.STRING)
     private ResultType resultType;
 
-    @ManyToOne
-    @JoinColumn(name = "participant_id")
-    private Participant participant;
+    @ManyToMany(mappedBy = "disciplins", fetch = FetchType.LAZY)
+    private Set<Participant> participants;
 
     @OneToMany(mappedBy = "disciplin", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Result> results;
@@ -34,13 +28,9 @@ public class Disciplin {
     public Disciplin() {
     }
 
-    public Disciplin(String name, DisciplineType disciplineType, ResultType resultType, Participant participant) {
+    public Disciplin(String name, DisciplineType disciplineType, ResultType resultType) {
         this.name = name;
         this.disciplineType = disciplineType;
         this.resultType = resultType;
-        this.participant = participant;
-    }
-
-    public Disciplin(DisciplineType type, ResultType resultType, Object o) {
     }
 }

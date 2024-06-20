@@ -15,6 +15,5 @@ public class ParticipantDtoRequest {
     private String gender;
     private int age;
     private String club;
-    private List<Integer> disciplineIds;  // List of discipline IDs for linking
-
+    private List<Integer> disciplineIds;
 }

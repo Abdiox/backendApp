@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 
 @Getter
 @Setter
@@ -18,14 +17,11 @@ public class DisciplinDtoResponse {
     private String name;
     private DisciplineType disciplineType;
     private ResultType resultType;
-    private List<ResultDtoResponse> result;
-
 
     public DisciplinDtoResponse(Disciplin disciplin) {
         this.id = disciplin.getId();
         this.name = disciplin.getName();
         this.disciplineType = disciplin.getDisciplineType();
         this.resultType = disciplin.getResultType();
-        this.result = disciplin.getResults().stream().map(ResultDtoResponse::new).collect(java.util.stream.Collectors.toList());
     }
 }

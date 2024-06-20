@@ -1,10 +1,10 @@
 package dat3.project.entity;
 
+import dat3.project.entity.Disciplin;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Collection;
 import java.util.Set;
 
 @Setter
@@ -19,8 +19,16 @@ public class Participant {
     private int age;
     private String club;
 
-    @OneToMany(mappedBy = "participant", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "participant_disciplin",
+            joinColumns = @JoinColumn(name = "participant_id"),
+            inverseJoinColumns = @JoinColumn(name = "disciplin_id")
+    )
     private Set<Disciplin> disciplins;
+
+    @OneToMany(mappedBy = "participant", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Result> results;
 
     public Participant() {
     }
@@ -31,6 +39,4 @@ public class Participant {
         this.age = age;
         this.club = club;
     }
-
-
 }

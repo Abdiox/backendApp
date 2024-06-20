@@ -17,7 +17,7 @@ public class ParticipantDtoResponse {
     private String gender;
     private int age;
     private String club;
-    private List<DisciplinDtoResponse> disciplin;  // Use the response DTO for nested data
+    private List<DisciplinDtoResponse> disciplin;
 
     public ParticipantDtoResponse(Participant participant) {
         this.id = participant.getId();
