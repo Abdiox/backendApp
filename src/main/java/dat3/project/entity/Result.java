@@ -24,13 +24,18 @@ public class Result {
     @JoinColumn(name = "disciplin_id")
     private Disciplin disciplin;
 
+    @ManyToOne
+    @JoinColumn(name = "participant_id")
+    private Participant participant;
+
     public Result() {
     }
 
-    public Result(int resultValue, LocalDateTime date, ResultType resultType, Disciplin disciplin) {
+    public Result(int resultValue, LocalDateTime date, ResultType resultType, Disciplin disciplin, Participant participant) {
         this.resultValue = resultValue;
         this.date = date;
         this.resultType = resultType;
         this.disciplin = disciplin;
+        this.participant = participant;
     }
 }

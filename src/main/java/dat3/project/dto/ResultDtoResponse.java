@@ -14,11 +14,20 @@ public class ResultDtoResponse {
     private int resultValue;
     private LocalDateTime date;
     private ResultType resultType;
+    private int participantId; // Add participant ID
+    private String participantName;
+    private int disciplinId; // Add disciplin ID
+    private String disciplinName;
 
     public ResultDtoResponse(Result result) {
         this.id = result.getId();
         this.resultValue = result.getResultValue();
         this.date = result.getDate();
         this.resultType = result.getResultType();
+        if (result.getParticipant() != null) {
+            this.participantId = result.getParticipant().getId();
+            this.participantName = result.getParticipant().getName();
+            this.disciplinName = result.getDisciplin().getName();
+        }
     }
 }

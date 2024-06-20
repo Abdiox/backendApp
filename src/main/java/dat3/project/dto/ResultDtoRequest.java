@@ -12,6 +12,6 @@ public class ResultDtoRequest {
     private int resultValue;
     private LocalDateTime date;
     private ResultType resultType;
-
-    // Default constructor, getters, setters
+    private int participantId; // This will hold the ID of the participant
+    private int disciplinId; // This will hold the ID of the disciplin
 }

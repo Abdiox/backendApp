@@ -4,6 +4,7 @@ import dat3.project.Enum.DisciplineType;
 import dat3.project.Enum.ResultType;
 import dat3.project.entity.Participant;
 import dat3.project.entity.Disciplin;
+import dat3.project.entity.Result;
 import dat3.project.repository.ParticipantRepository;
 import dat3.project.repository.DisciplinRepository;
 import dat3.project.repository.ResultRepository;
@@ -13,8 +14,6 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
-
-import static dat3.project.Enum.DisciplineType.LØB_100_METER;
 
 @Component
 public class InitData implements CommandLineRunner {
@@ -31,7 +30,7 @@ public class InitData implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        // Create and save participants
+        // Participants
         Participant participant1 = new Participant("abdiox", "Mand", 22, "Rødovre AtletikKlub");
         participantRepository.save(participant1);
 
@@ -41,29 +40,22 @@ public class InitData implements CommandLineRunner {
         Participant participant3 = new Participant("Mbappe", "Mand", 25, "PSG AtletikKlub");
         participantRepository.save(participant3);
 
-       /* Disciplin disciplin1 = new Disciplin("100-meterløb", LØB_100_METER, ResultType.TIME, participant1);
-        disciplinRepository.save(disciplin1);
-
-        */
-
-
+        // Disciplines
         List<Disciplin> discipliner = Arrays.asList(
-                new Disciplin("100-meterløb", DisciplineType.LØB_100_METER, ResultType.TIME, null),
-                new Disciplin("200-meterløb", DisciplineType.LØB_200_METER, ResultType.TIME, null),
-                new Disciplin("400-meterløb", DisciplineType.LØB_400_METER, ResultType.TIME, null),
-                new Disciplin("800-meterløb", DisciplineType.LØB_800_METER, ResultType.TIME, null),
-                new Disciplin("1500-meterløb", DisciplineType.LØB_1500_METER, ResultType.TIME, null),
-                new Disciplin("Hækkeløb", DisciplineType.HÆKKELØB, ResultType.TIME, null),
-                new Disciplin("Højdespring", DisciplineType.HØJDESPIRING, ResultType.DISTANCE, null),
-                new Disciplin("Stangspring", DisciplineType.STANGSPRING, ResultType.DISTANCE, null),
-                new Disciplin("Længdespring", DisciplineType.LÆNGDESPRING, ResultType.DISTANCE, null),
-                new Disciplin("Kuglestød", DisciplineType.KUGLESTØD, ResultType.DISTANCE, null),
-                new Disciplin("Diskoskast", DisciplineType.DISKOSKAST, ResultType.DISTANCE, null),
-                new Disciplin("Spydkast", DisciplineType.SPYDKAST, ResultType.POINTS, null)
+                new Disciplin("100-meterløb", DisciplineType.LØB_100_METER, ResultType.TIME, participant1),
+                new Disciplin("200-meterløb", DisciplineType.LØB_200_METER, ResultType.TIME, participant2),
+                new Disciplin("400-meterløb", DisciplineType.LØB_400_METER, ResultType.TIME, participant3)
+                // More disciplines...
         );
-
         disciplinRepository.saveAll(discipliner);
-    }
 
+        // Results
+        List<Result> results = Arrays.asList(
+                new Result(9500, LocalDateTime.now(), ResultType.TIME, discipliner.get(0), participant1), // 9.5 seconds for 100m
+                new Result(19500, LocalDateTime.now(), ResultType.TIME, discipliner.get(1), participant2), // 19.5 seconds for 200m
+                new Result(45000, LocalDateTime.now(), ResultType.TIME, discipliner.get(2), participant3) // 45 seconds for 400m
+                // More results...
+        );
+        resultRepository.saveAll(results);
     }
-
+}
