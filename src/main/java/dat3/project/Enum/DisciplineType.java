@@ -12,7 +12,8 @@ public enum DisciplineType {
     LÆNGDESPRING("Længdespring"),
     KUGLESTØD("Kuglestød"),
     DISKOSKAST("Diskoskast"),
-    SPYDKAST("Spydkast");
+    SPYDKAST("Spydkast"),
+    HEPTATHLON("Hepthlon");
 
     private final String name;
 

@@ -51,9 +51,10 @@ public class InitData implements CommandLineRunner {
         Disciplin displin10 = new Disciplin("Kuglestød", DisciplineType.KUGLESTØD, ResultType.DISTANCE);
         Disciplin displin11 = new Disciplin("Diskoskast", DisciplineType.DISKOSKAST, ResultType.DISTANCE);
         Disciplin displin12 = new Disciplin("Spydkast", DisciplineType.SPYDKAST, ResultType.DISTANCE);
+        Disciplin disciplin13 = new Disciplin("Hepthlon", DisciplineType.HEPTATHLON, ResultType.POINTS);
 
 
-        disciplinRepository.saveAll(Arrays.asList(disciplin1, disciplin2, disciplin3, displin4, displin5, displin6, displin7, displin8, displin9, displin10, displin11, displin12));
+        disciplinRepository.saveAll(Arrays.asList(disciplin1, disciplin2, disciplin3, displin4, displin5, displin6, displin7, displin8, displin9, displin10, displin11, displin12, disciplin13));
 
         // Link participants and disciplines
         participant1.setDisciplins(new HashSet<>(Arrays.asList(disciplin1)));
