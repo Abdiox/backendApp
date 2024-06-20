@@ -16,18 +16,16 @@ import java.util.stream.Collectors;
 public class ResultService {
 
     private final ResultRepository resultRepository;
-    private final ParticipantRepository participantRepository; // Dependency to handle participants
+    private final ParticipantRepository participantRepository;
 
     public ResultService(ResultRepository resultRepository, ParticipantRepository participantRepository) {
         this.resultRepository = resultRepository;
-        this.participantRepository = participantRepository; // Initialize participant repository
+        this.participantRepository = participantRepository;
     }
 
     public List<ResultDtoResponse> getAllResults() {
         List<Result> results = resultRepository.findAll();
-        return results.stream()
-                .map(ResultDtoResponse::new)
-                .collect(Collectors.toList());
+        return results.stream().map(ResultDtoResponse::new).collect(Collectors.toList());
     }
 
     public ResultDtoResponse getResultById(int id) {

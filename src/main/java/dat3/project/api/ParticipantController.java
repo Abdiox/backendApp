@@ -44,6 +44,7 @@ public class ParticipantController {
         }
     }
 
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteParticipant(@PathVariable int id) {
         return participantService.deleteParticipant(id);

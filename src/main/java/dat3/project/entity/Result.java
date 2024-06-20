@@ -14,18 +14,18 @@ public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int resultValue; // Stores the result value, could be time in ms, distance in cm, points, etc.
+    private int resultValue;
     private LocalDateTime date;
 
     @Enumerated(EnumType.STRING)
-    private ResultType resultType; // Use the ResultType enum
+    private ResultType resultType;
 
     @ManyToOne
-    @JoinColumn(name = "disciplin_id")
+    @JoinColumn(name = "disciplin_id", nullable = false)
     private Disciplin disciplin;
 
     @ManyToOne
-    @JoinColumn(name = "participant_id")
+    @JoinColumn(name = "participant_id", nullable = false)
     private Participant participant;
 
     public Result() {
@@ -38,4 +38,6 @@ public class Result {
         this.disciplin = disciplin;
         this.participant = participant;
     }
+
+    // Getters and setters
 }

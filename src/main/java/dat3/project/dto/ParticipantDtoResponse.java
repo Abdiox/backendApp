@@ -17,8 +17,7 @@ public class ParticipantDtoResponse {
     private String gender;
     private int age;
     private String club;
-    private List<DisciplinDtoResponse> disciplin;
-    private List<ResultDtoResponse> result;
+    private List<DisciplinDtoResponse> disciplin;  // Use the response DTO for nested data
 
     public ParticipantDtoResponse(Participant participant) {
         this.id = participant.getId();
@@ -26,8 +25,8 @@ public class ParticipantDtoResponse {
         this.gender = participant.getGender();
         this.age = participant.getAge();
         this.club = participant.getClub();
-        this.disciplin = participant.getDisciplins().stream().map(DisciplinDtoResponse::new).collect(Collectors.toList());
+        this.disciplin = participant.getDisciplins().stream()
+                .map(DisciplinDtoResponse::new)
+                .collect(Collectors.toList());
     }
-
-
 }

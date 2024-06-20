@@ -51,7 +51,6 @@ public class DisciplinService {
 
     public DisciplinDtoResponse addDisciplin(DisciplinDtoRequest request) {
         Disciplin newDisciplin = new Disciplin();
-        updateDisciplin(newDisciplin, request);
         disciplinRepository.save(newDisciplin);
         return new DisciplinDtoResponse(newDisciplin);
     }
