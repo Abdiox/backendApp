@@ -16,6 +16,8 @@ public class ResultDtoResponse {
     private ResultType resultType;
     private int participantId;
     private int disciplinId;
+    private String participantName;
+    private String disciplinName;
 
 
     public ResultDtoResponse(Result result) {
@@ -26,6 +28,8 @@ public class ResultDtoResponse {
         if (result.getParticipant() != null) {
             this.participantId = result.getParticipant().getId();
             this.disciplinId = result.getDisciplin().getId();
+            this.participantName = result.getParticipant().getName();
+            this.disciplinName = result.getDisciplin().getName();
         }
     }
 }
