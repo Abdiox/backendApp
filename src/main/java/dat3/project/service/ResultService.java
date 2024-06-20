@@ -2,8 +2,10 @@ package dat3.project.service;
 
 import dat3.project.dto.ResultDtoRequest;
 import dat3.project.dto.ResultDtoResponse;
+import dat3.project.entity.Disciplin;
 import dat3.project.entity.Participant;
 import dat3.project.entity.Result;
+import dat3.project.repository.DisciplinRepository;
 import dat3.project.repository.ParticipantRepository;
 import dat3.project.repository.ResultRepository;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +19,12 @@ public class ResultService {
 
     private final ResultRepository resultRepository;
     private final ParticipantRepository participantRepository;
+    private final DisciplinRepository disciplinRepository;
 
-    public ResultService(ResultRepository resultRepository, ParticipantRepository participantRepository) {
+    public ResultService(ResultRepository resultRepository, ParticipantRepository participantRepository, DisciplinRepository disciplinRepository) {
         this.resultRepository = resultRepository;
         this.participantRepository = participantRepository;
+        this.disciplinRepository = disciplinRepository;
     }
 
     public List<ResultDtoResponse> getAllResults() {
@@ -35,11 +39,16 @@ public class ResultService {
     }
 
     public ResultDtoResponse addResult(ResultDtoRequest request) {
-        Result newResult = new Result();
-        updateResult(newResult, request);
+        Participant participant = participantRepository.findById(request.getParticipantId())
+                .orElseThrow(() -> new RuntimeException("Participant not found"));
+        Disciplin disciplin = disciplinRepository.findById(request.getDisciplinId())
+                .orElseThrow(() -> new RuntimeException("Disciplin not found"));
+
+        Result newResult = new Result(request.getResultValue(), request.getDate(), request.getResultType(), disciplin, participant);
         resultRepository.save(newResult);
         return new ResultDtoResponse(newResult);
     }
+
 
     public ResultDtoResponse editResult(ResultDtoRequest request, int id) {
         Result result = resultRepository.findById(id).orElseThrow(() ->
