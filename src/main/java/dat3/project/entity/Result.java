@@ -1,31 +1,36 @@
 package dat3.project.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import dat3.project.Enum.ResultType;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
-@Getter
 @Setter
+@Getter
 @Entity
 public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Enum resultType;
-    private Date date;
-    private int resultValue;
+    private int resultValue; // Stores the result value, could be time in ms, distance in cm, points, etc.
+    private LocalDateTime date;
+
+    @Enumerated(EnumType.STRING)
+    private ResultType resultType; // Use the ResultType enum
+
+    @ManyToOne
+    @JoinColumn(name = "disciplin_id")
+    private Disciplin disciplin;
 
     public Result() {
     }
 
-    public Result(Enum resultType, Date date, int resultValue) {
-        this.resultType = resultType;
-        this.date = date;
+    public Result(int resultValue, LocalDateTime date, ResultType resultType, Disciplin disciplin) {
         this.resultValue = resultValue;
+        this.date = date;
+        this.resultType = resultType;
+        this.disciplin = disciplin;
     }
 }

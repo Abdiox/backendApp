@@ -18,7 +18,7 @@ public class Participant {
     private int age;
     private String club;
 
-    @OneToMany(mappedBy = "participant")
+    @OneToMany(mappedBy = "participant", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Disciplin> disciplins;
 
     public Participant() {

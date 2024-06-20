@@ -1,5 +1,6 @@
 package dat3.project.service;
 
+import dat3.project.Enum.ResultType;
 import dat3.project.dto.DisciplinDtoRequest;
 import dat3.project.dto.DisciplinDtoResponse;
 import dat3.project.entity.Disciplin;
@@ -87,7 +88,7 @@ public class DisciplinService {
 
     private void updateDisciplin(Disciplin disciplin, DisciplinDtoRequest request) {
         disciplin.setName(request.getName());
-        disciplin.setResultType(request.getResultType());
+        disciplin.setResultType((ResultType) request.getResultType());
         // Add logic here if you want to set the disciplin
         // Disciplin.setOwner(request.getOwner());
     }
