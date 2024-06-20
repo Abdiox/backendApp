@@ -27,16 +27,33 @@ public class ResultService {
         this.disciplinRepository = disciplinRepository;
     }
 
+    /**
+     * Gets all results
+     * @return A list of results
+     */
+
     public List<ResultDtoResponse> getAllResults() {
         List<Result> results = resultRepository.findAll();
         return results.stream().map(ResultDtoResponse::new).collect(Collectors.toList());
     }
+
+    /**
+     * Gets a result by id
+     * @param id The id of the result
+     * @return The result
+     */
 
     public ResultDtoResponse getResultById(int id) {
         Result result = resultRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Result not found"));
         return new ResultDtoResponse(result);
     }
+
+    /**
+     * Adds a result
+     * @param request The request containing the result data
+     * @return The added result
+     */
 
     public ResultDtoResponse addResult(ResultDtoRequest request) {
         Participant participant = participantRepository.findById(request.getParticipantId())
@@ -49,6 +66,13 @@ public class ResultService {
         return new ResultDtoResponse(newResult);
     }
 
+    /**
+     * Edits a result
+     * @param request The request containing the result data
+     * @param id The id of the result
+     * @return The edited result
+     */
+
 
     public ResultDtoResponse editResult(ResultDtoRequest request, int id) {
         Result result = resultRepository.findById(id).orElseThrow(() ->
@@ -57,6 +81,12 @@ public class ResultService {
         resultRepository.save(result);
         return new ResultDtoResponse(result);
     }
+
+    /**
+     * Deletes a result
+     * @param id The id of the result
+     * @return A response entity
+     */
 
     public ResponseEntity<Void> deleteResult(int id) {
         Result result = resultRepository.findById(id).orElseThrow(() ->

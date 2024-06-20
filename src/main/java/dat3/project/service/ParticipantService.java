@@ -24,16 +24,34 @@ public class ParticipantService {
         this.disciplinRepository = disciplinRepository;
     }
 
+
+    /**
+     * Gets all participants
+     * @return A list of participants
+     */
+
     public List<ParticipantDtoResponse> getAllParticipants() {
         List<Participant> participants = participantRepository.findAll();
         return participants.stream().map(ParticipantDtoResponse::new).collect(Collectors.toList());
     }
+
+    /**
+     * Gets a participant by id
+     * @param id The id of the participant
+     * @return The participant
+     */
 
     public ParticipantDtoResponse getParticipantById(int id) {
         Participant participant = participantRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Participant not found"));
         return new ParticipantDtoResponse(participant);
     }
+
+    /**
+     * Adds a participant
+     * @param request The request containing the participant data
+     * @return The added participant
+     */
 
     public ParticipantDtoResponse addParticipant(ParticipantDtoRequest request) {
         Participant newParticipant = new Participant(request.getName(), request.getGender(), request.getAge(), request.getClub());
@@ -45,6 +63,13 @@ public class ParticipantService {
         participantRepository.save(newParticipant);
         return new ParticipantDtoResponse(newParticipant);
     }
+
+    /**
+     * Edits a participant
+     * @param request The request containing the participant data
+     * @param id The id of the participant
+     * @return The edited participant
+     */
 
     public ParticipantDtoResponse editParticipant(ParticipantDtoRequest request, int id) {
         Participant participant = participantRepository.findById(id)
@@ -64,6 +89,12 @@ public class ParticipantService {
         participantRepository.save(participant);
         return new ParticipantDtoResponse(participant);
     }
+
+    /**
+     * Deletes a participant
+     * @param id The id of the participant
+     * @return A response entity
+     */
 
     public ResponseEntity<Void> deleteParticipant(int id) {
         participantRepository.findById(id)
