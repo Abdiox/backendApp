@@ -48,6 +48,16 @@ public class ParticipantService {
     }
 
     /**
+     * Gets an Participant by name
+     * @param name The name of the Participant
+     * @return The Participant
+     */
+    public Participant getParticipantByName(String name) {
+        return participantRepository.findByName(name).orElseThrow(() ->
+                new RuntimeException("Participant not found"));
+    }
+
+    /**
      * Adds an participant
      *
      * @param request The request containing the participant data

@@ -4,6 +4,7 @@ package dat3.project.api;
 import dat3.project.dto.DisciplinDtoResponse;
 import dat3.project.dto.ParticipantDtoRequest;
 import dat3.project.dto.ParticipantDtoResponse;
+import dat3.project.entity.Participant;
 import dat3.project.service.ParticipantService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,11 @@ public class ParticipantController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<ParticipantDtoResponse> getParticipantsById(@PathVariable Integer id) {
         return ResponseEntity.ok(participantService.getParticipantById(id));
+    }
+    @GetMapping("/name{name}")
+    public ParticipantDtoResponse getParticipantByName(@PathVariable String name) {
+        Participant participant = participantService.getParticipantByName(name);
+        return new ParticipantDtoResponse(participant);
     }
 
 
