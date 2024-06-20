@@ -36,13 +36,13 @@ public class InitData implements CommandLineRunner {
         participantRepository.save(participant2);
 
         // Create and save disciplines
-        Disciplin disciplin1 = new Disciplin("100m", ResultType.TIME, participant1);
+        Disciplin disciplin1 = new Disciplin("200-meterløb", ResultType.TIME, participant1);
         disciplinRepository.save(disciplin1);
 
-        Disciplin disciplin2 = new Disciplin("200m", ResultType.DISTANCE, participant1);
+        Disciplin disciplin2 = new Disciplin("200-meterløb", ResultType.TIME, participant2);
         disciplinRepository.save(disciplin2);
 
-        Disciplin disciplin3 = new Disciplin("400m", ResultType.TIME, participant2);
+        Disciplin disciplin3 = new Disciplin("400-meterløb", ResultType.TIME, participant2);
         disciplinRepository.save(disciplin3);
 
         // Create and save results

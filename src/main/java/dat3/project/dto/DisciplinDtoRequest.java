@@ -19,5 +19,6 @@ public class DisciplinDtoRequest {
         this.id = disciplin.getId();
         this.name = disciplin.getName();
         this.resultType = disciplin.getResultType();
+
     }
 }

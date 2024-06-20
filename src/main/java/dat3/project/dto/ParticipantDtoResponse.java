@@ -17,7 +17,8 @@ public class ParticipantDtoResponse {
     private String gender;
     private int age;
     private String club;
-    private List<DisciplinDtoResponse> disciplin; // Add pets to include pet information in the response
+    private List<DisciplinDtoResponse> disciplin;
+    private List<ResultDtoResponse> result;
 
     public ParticipantDtoResponse(Participant participant) {
         this.id = participant.getId();

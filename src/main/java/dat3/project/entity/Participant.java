@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Collection;
 import java.util.Set;
 
 @Setter
@@ -30,4 +31,6 @@ public class Participant {
         this.age = age;
         this.club = club;
     }
+
+
 }
