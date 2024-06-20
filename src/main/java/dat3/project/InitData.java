@@ -1,43 +1,32 @@
 package dat3.project;
 
-import dat3.project.entity.Owners;
-import dat3.project.entity.Pets;
-import dat3.project.repository.OwnersRepository;
-import dat3.project.repository.PetsRepository;
+import dat3.project.entity.Participant;
+import dat3.project.repository.DisciplinRepository;
+import dat3.project.repository.ParticipantRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class InitData implements CommandLineRunner {
 
-    private final PetsRepository petsRepository;
-    private final OwnersRepository ownersRepository;
+    private final DisciplinRepository disciplinRepository;
+    private final ParticipantRepository participantRepository;
 
-    public InitData(PetsRepository petsRepository, OwnersRepository ownersRepository) {
-        this.petsRepository = petsRepository;
-        this.ownersRepository = ownersRepository;
+    public InitData(DisciplinRepository disciplinRepository, ParticipantRepository participantRepository) {
+        this.disciplinRepository = disciplinRepository;
+        this.participantRepository = participantRepository;
     }
+
 
     @Override
     public void run(String... args) {
         // Create and save owners
-        Owners owner1 = new Owners("Abdiox", 22);
-        ownersRepository.save(owner1);
+        Participant participant1 = new Participant("abdiox", "Mand", 22, "Rødovre AtletikKlub" );
+        participantRepository.save(participant1);
 
-        Owners owner2 = new Owners("Mendy", 28);
-        ownersRepository.save(owner2);
+        Participant participant2 = new Participant("Mendy", "Mand", 28, "Rødovre AtletikKlub" );
+        participantRepository.save(participant2);
 
-        // Create and save pets with owners
-        Pets pet1 = new Pets("Alfred", "Dog", "White");
-        pet1.setOwner(owner1);
-        petsRepository.save(pet1);
 
-        Pets pet2 = new Pets("Bella", "Cat", "Black");
-        pet2.setOwner(owner2);
-        petsRepository.save(pet2);
-
-        Pets pet3 = new Pets("Charlie", "Bird", "Green");
-        pet3.setOwner(owner1);
-        petsRepository.save(pet3);
     }
 }

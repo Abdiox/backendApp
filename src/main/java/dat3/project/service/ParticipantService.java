@@ -2,10 +2,10 @@ package dat3.project.service;
 
 import dat3.project.dto.ParticipantDtoRequest;
 import dat3.project.dto.ParticipantDtoResponse;
+import dat3.project.entity.Disciplin;
 import dat3.project.entity.Participant;
-import dat3.project.entity.Pets;
+import dat3.project.repository.DisciplinRepository;
 import dat3.project.repository.ParticipantRepository;
-import dat3.project.repository.PetsRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +15,13 @@ import java.util.stream.Collectors;
 @Service
 public class ParticipantService {
     private final ParticipantRepository participantRepository;
-    private final PetsRepository petsRepository;
+    private final DisciplinRepository disciplinRepository;
 
-    public ParticipantService(ParticipantRepository participantRepository, PetsRepository petsRepository) {
+    public ParticipantService(ParticipantRepository participantRepository, DisciplinRepository disciplinRepository) {
         this.participantRepository = participantRepository;
-        this.petsRepository = petsRepository;
+        this.disciplinRepository = disciplinRepository;
     }
+
 
     /**
      * Gets all Participants
@@ -58,11 +59,11 @@ public class ParticipantService {
         participantRepository.save(newParticipants);
 
         // Handle pets if included in the request
-        if (request.getPets() != null) {
-            request.getPets().forEach(petRequest -> {
-                Pets pet = new Pets(petRequest.getName(), petRequest.getSpecies(), petRequest.getColor());
-                pet.setParticipant(newParticipants);
-                petsRepository.save(pet);
+        if (request.getDisciplin() != null) {
+            request.getDisciplin().forEach(disciplinRequest -> {
+                Disciplin disciplin = new Disciplin();
+                disciplin.setParticipant(newParticipants);
+                disciplinRepository.save(disciplin);
             });
         }
 

@@ -7,24 +7,22 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-public class Pets {
+public class Disciplin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String species;
-    private String color;
+    private Enum resultType;
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
-    private Owners owner;
+    private Participant participant;
 
-    public Pets() {
+    public Disciplin() {
     }
 
-    public Pets(String name, String species, String color) {
+    public Disciplin(String name, Enum resultType) {
         this.name = name;
-        this.species = species;
-        this.color = color;
+        this.resultType = resultType;
     }
 }

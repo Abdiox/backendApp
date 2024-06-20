@@ -15,12 +15,12 @@ public class ParticipantDtoResponse {
     private int id;
     private String name;
     private int age;
-    private List<PetsDtoResponse> pets; // Add pets to include pet information in the response
+    private List<DisciplinDtoResponse> disciplin; // Add pets to include pet information in the response
 
     public ParticipantDtoResponse(Participant participant) {
         this.id = participant.getId();
         this.name = participant.getName();
         this.age = participant.getAge();
-        this.pets = participant.getPets().stream().map(PetsDtoResponse::new).collect(Collectors.toList());
+        this.disciplin = participant.getDisciplins().stream().map(DisciplinDtoResponse::new).collect(Collectors.toList());
     }
 }

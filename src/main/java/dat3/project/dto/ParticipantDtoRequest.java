@@ -19,7 +19,7 @@ public class ParticipantDtoRequest {
     private String gender;
     private int age;
     private String club;
-    private List<PetsDtoRequest> pets; // Add pets to handle pet information
+    private List<DisciplinDtoRequest> disciplin; // Add pets to handle pet information
 
     public ParticipantDtoRequest(Participant participant) {
         this.id = participant.getId();
@@ -27,6 +27,6 @@ public class ParticipantDtoRequest {
         this.gender = participant.getGender();
         this.age = participant.getAge();
         this.club = participant.getClub();
-        this.pets = participant.getPets().stream().map(PetsDtoRequest::new).collect(Collectors.toList());
+        this.disciplin = participant.getDisciplins().stream().map(DisciplinDtoRequest::new).collect(Collectors.toList());
     }
 }

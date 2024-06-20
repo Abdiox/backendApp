@@ -18,8 +18,8 @@ public class Participant {
     private int age;
     private String club;
 
-    @OneToMany(mappedBy = "owner")
-    private Set<Pets> pets;
+    @OneToMany(mappedBy = "participant")
+    private Set<Disciplin> disciplins;
 
     public Participant() {
     }
