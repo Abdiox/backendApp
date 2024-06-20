@@ -20,6 +20,7 @@ public class DisciplinService {
         this.disciplinRepository = disciplinRepository;
     }
 
+
     /**
      * Gets all disciplins
      * @return A list of disciplins
@@ -36,10 +37,10 @@ public class DisciplinService {
      * @param id The id of the disciplin
      * @return The disciplin
      */
+
     public DisciplinDtoResponse getDisciplinById(int id) {
-        Disciplin disciplins = disciplinRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Disciplin not found"));
-        return new DisciplinDtoResponse(disciplins);
+        Disciplin disciplin = findDisciplinById(id);
+        return new DisciplinDtoResponse(disciplin);
     }
 
     /**
@@ -47,6 +48,7 @@ public class DisciplinService {
      * @param request The request containing the disciplin data
      * @return The added disciplin
      */
+
     public DisciplinDtoResponse addDisciplin(DisciplinDtoRequest request) {
         Disciplin newDisciplin = new Disciplin();
         updateDisciplin(newDisciplin, request);
@@ -60,36 +62,46 @@ public class DisciplinService {
      * @param id The id of the disciplin
      * @return The edited disciplin
      */
+
     public DisciplinDtoResponse editDisciplin(DisciplinDtoRequest request, int id) {
-        Disciplin disciplins = disciplinRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Disciplin not found"));
-        updateDisciplin(disciplins, request);
-        disciplinRepository.save(disciplins);
-        return new DisciplinDtoResponse(disciplins);
+        Disciplin disciplin = findDisciplinById(id);
+        updateDisciplin(disciplin, request);
+        disciplinRepository.save(disciplin);
+        return new DisciplinDtoResponse(disciplin);
     }
+
 
     /**
      * Deletes a disciplin
      * @param id The id of the disciplin
-     * @return A response entity
+     * @return The deleted disciplin
      */
+
     public ResponseEntity<Void> deleteDisciplin(int id) {
-        Disciplin disciplins = disciplinRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Disciplin not found"));
-        disciplinRepository.delete(disciplins);
+        Disciplin disciplin = findDisciplinById(id);
+        disciplinRepository.delete(disciplin);
         return ResponseEntity.ok().build();
     }
 
     /**
-     *
-     * @param disciplin
-     * @param request
+     * Finds a disciplin by id
+     * @param id The id of the disciplin
+     * @return The disciplin
+     */
+
+    private Disciplin findDisciplinById(int id) {
+        return disciplinRepository.findById(id).orElseThrow(() ->
+                new RuntimeException("Disciplin not found"));
+    }
+
+    /**
+     * Updates a disciplin
+     * @param disciplin The disciplin to update
+     * @param request The request containing the disciplin data
      */
 
     private void updateDisciplin(Disciplin disciplin, DisciplinDtoRequest request) {
         disciplin.setName(request.getName());
-        disciplin.setResultType((ResultType) request.getResultType());
-        // Add logic here if you want to set the disciplin
-        // Disciplin.setOwner(request.getOwner());
+        disciplin.setResultType(request.getResultType());
     }
 }

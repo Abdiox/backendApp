@@ -1,5 +1,6 @@
 package dat3.project.entity;
 
+import dat3.project.Enum.DisciplineType;
 import dat3.project.Enum.ResultType;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -14,10 +15,14 @@ public class Disciplin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
 
     @Enumerated(EnumType.STRING)
-    private ResultType resultType; // Use the ResultType enum
+    private DisciplineType disciplineType;
+
+    @Enumerated(EnumType.STRING)
+    private ResultType resultType;
 
     @ManyToOne
     @JoinColumn(name = "participant_id")
@@ -29,9 +34,13 @@ public class Disciplin {
     public Disciplin() {
     }
 
-    public Disciplin(String name, ResultType resultType, Participant participant) {
+    public Disciplin(String name, DisciplineType disciplineType, ResultType resultType, Participant participant) {
         this.name = name;
+        this.disciplineType = disciplineType;
         this.resultType = resultType;
         this.participant = participant;
+    }
+
+    public Disciplin(DisciplineType type, ResultType resultType, Object o) {
     }
 }

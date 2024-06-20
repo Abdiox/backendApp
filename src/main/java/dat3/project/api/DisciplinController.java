@@ -19,7 +19,7 @@ public class DisciplinController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DisciplinDtoResponse>> getAllPets() {
+    public ResponseEntity<List<DisciplinDtoResponse>> getAllDisciplins() {
         return ResponseEntity.ok(disciplinService.getAllDisciplins());
     }
 
@@ -36,7 +36,8 @@ public class DisciplinController {
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<DisciplinDtoResponse> editDisciplin(@RequestBody DisciplinDtoRequest request, @PathVariable Integer id) {
-        return ResponseEntity.ok(disciplinService.editDisciplin(request, id));
+        DisciplinDtoResponse response = disciplinService.editDisciplin(request, id);
+        return ResponseEntity.ok(response); // 200 OK
     }
 
     @DeleteMapping(path = "/{id}")

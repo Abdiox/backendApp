@@ -2,9 +2,7 @@ package dat3.project.service;
 
 import dat3.project.dto.ParticipantDtoRequest;
 import dat3.project.dto.ParticipantDtoResponse;
-import dat3.project.entity.Disciplin;
 import dat3.project.entity.Participant;
-import dat3.project.repository.DisciplinRepository;
 import dat3.project.repository.ParticipantRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,20 +12,18 @@ import java.util.stream.Collectors;
 
 @Service
 public class ParticipantService {
-    private final ParticipantRepository participantRepository;
-    private final DisciplinRepository disciplinRepository;
 
-    public ParticipantService(ParticipantRepository participantRepository, DisciplinRepository disciplinRepository) {
+    private final ParticipantRepository participantRepository;
+
+    public ParticipantService(ParticipantRepository participantRepository) {
         this.participantRepository = participantRepository;
-        this.disciplinRepository = disciplinRepository;
     }
 
-
     /**
-     * Gets all Participants
-     *
-     * @return A list of Participants
+     * Gets all participants
+     * @return A list of participants
      */
+
     public List<ParticipantDtoResponse> getAllParticipants() {
         List<Participant> participants = participantRepository.findAll();
         return participants.stream()
@@ -36,85 +32,57 @@ public class ParticipantService {
     }
 
     /**
-     * Gets an Participant by id
-     *
-     * @param id The id of the Participant
-     * @return The Participant
+     * Gets a participant by id
+     * @param id The id of the participant
+     * @return The participant
      */
+
     public ParticipantDtoResponse getParticipantById(int id) {
-        Participant participants = participantRepository.findById(id).orElseThrow(() ->
+        Participant participant = participantRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Participant not found"));
-        return new ParticipantDtoResponse(participants);
+        return new ParticipantDtoResponse(participant);
     }
 
     /**
-     * Gets an Participant by name
-     * @param name The name of the Participant
-     * @return The Participant
-     */
-    public Participant getParticipantByName(String name) {
-        return participantRepository.findByName(name).orElseThrow(() ->
-                new RuntimeException("Participant not found"));
-    }
-
-    /**
-     * Adds an participant
-     *
+     * Adds a participant
      * @param request The request containing the participant data
      * @return The added participant
      */
+
     public ParticipantDtoResponse addParticipant(ParticipantDtoRequest request) {
-        Participant newParticipants = new Participant();
-        updateParticipants(newParticipants, request);
-        participantRepository.save(newParticipants);
-
-        // Handle pets if included in the request
-        if (request.getDisciplin() != null) {
-            request.getDisciplin().forEach(disciplinRequest -> {
-                Disciplin disciplin = new Disciplin();
-                disciplin.setParticipant(newParticipants);
-                disciplinRepository.save(disciplin);
-            });
-        }
-
-        return new ParticipantDtoResponse(newParticipants);
+        Participant newParticipant = new Participant(request.getName(), request.getGender(), request.getAge(), request.getClub());
+        participantRepository.save(newParticipant);
+        return new ParticipantDtoResponse(newParticipant);
     }
 
     /**
-     * Edits an participant
-     *
-     * @param request The request containing the data
-     * @param id      The id of the participant
+     * Edits a participant
+     * @param request The request containing the participant data
+     * @param id The id of the participant
      * @return The edited participant
      */
+
     public ParticipantDtoResponse editParticipant(ParticipantDtoRequest request, int id) {
-        Participant participants = participantRepository.findById(id).orElseThrow(() ->
+        Participant participant = participantRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Participant not found"));
-        updateParticipants(participants, request);
-        participantRepository.save(participants);
-        return new ParticipantDtoResponse(participants);
+        participant.setName(request.getName());
+        participant.setGender(request.getGender());
+        participant.setAge(request.getAge());
+        participant.setClub(request.getClub());
+        participantRepository.save(participant);
+        return new ParticipantDtoResponse(participant);
     }
 
     /**
-     * Deletes an participant
+     * Deletes a participant
      * @param id The id of the participant
      * @return A response entity
      */
+
     public ResponseEntity<Void> deleteParticipant(int id) {
-        Participant participants = participantRepository.findById(id).orElseThrow(() ->
+        Participant participant = participantRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Participant not found"));
-        participantRepository.delete(participants);
+        participantRepository.delete(participant);
         return ResponseEntity.ok().build();
-    }
-
-    /**
-     *
-     * @param participants The participant to update
-     * @param request The request containing the data
-     */
-
-    private void updateParticipants(Participant participants, ParticipantDtoRequest request) {
-        participants.setName(request.getName());
-        participants.setAge(request.getAge());
     }
 }
