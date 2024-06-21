@@ -38,8 +38,9 @@ public class ResultController {
         return resultService.editResult(request, id);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteResult(@PathVariable int id) {
-        return resultService.deleteResult(id);
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> deleteResult(@PathVariable Integer id) {
+        resultService.deleteResult(id);
+        return ResponseEntity.ok().build();
     }
 }

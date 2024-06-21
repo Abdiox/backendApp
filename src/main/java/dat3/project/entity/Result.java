@@ -31,4 +31,15 @@ public class Result {
     @JoinColumn(name = "participant_id")
     private Participant participant;
 
+    public Result(ResultType resultType, LocalDateTime date, int resultValue, Disciplin disciplin, Participant participant) {
+        this.resultType = resultType;
+        this.date = date;
+        this.resultValue = resultValue;
+        this.disciplin = disciplin;
+        this.participant = participant;
+    }
+
+    public Result() {
+
+    }
 }

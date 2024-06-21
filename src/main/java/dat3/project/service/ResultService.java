@@ -84,11 +84,8 @@ public class ResultService {
      * @return A response entity
      */
 
-    public ResponseEntity<Void> deleteResult(int id) {
-        Result result = resultRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Result not found"));
-        resultRepository.delete(result);
-        return ResponseEntity.ok().build();
+    public void deleteResult(int id) {
+        resultRepository.deleteById(id);
     }
 
     private void updateResult(Result result, ResultDtoRequest request) {

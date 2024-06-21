@@ -29,4 +29,6 @@ public class ParticipantDtoResponse {
                 .map(DisciplinDtoResponse::new)
                 .collect(Collectors.toList());
     }
+
+
 }

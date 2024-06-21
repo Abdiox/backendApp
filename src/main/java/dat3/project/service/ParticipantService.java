@@ -96,10 +96,7 @@ public class ParticipantService {
      * @return A response entity
      */
 
-    public ResponseEntity<Void> deleteParticipant(int id) {
-        participantRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Participant not found"));
+    public void deleteParticipant(int id) {
         participantRepository.deleteById(id);
-        return ResponseEntity.ok().build();
     }
 }

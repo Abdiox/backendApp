@@ -65,10 +65,12 @@ public class InitData implements CommandLineRunner {
         participantRepository.saveAll(Arrays.asList(participant1, participant2, participant3));
 
         // Results
-        Result result1 = new Result(9500, LocalDateTime.now(), ResultType.TIME, disciplin1, participant1); // 9.5 seconds for 100m
-        Result result2 = new Result(19500, LocalDateTime.now(), ResultType.TIME, disciplin2, participant2); // 19.5 seconds for 200m
-        Result result3 = new Result(45000, LocalDateTime.now(), ResultType.TIME, disciplin3, participant3); // 45 seconds for 400m
+        Result result1 = new Result(ResultType.TIME, LocalDateTime.now(), 19500, disciplin1, participant1); // 9.5 seconds for 100m
+        Result result2 = new Result(ResultType.TIME, LocalDateTime.now(), 25000, disciplin2, participant2);// 19.5 seconds for 200m
+        Result result3 = new Result(ResultType.TIME, LocalDateTime.now(), 30000, disciplin3, participant3); // 45 seconds for 400m
 
         resultRepository.saveAll(Arrays.asList(result1, result2, result3));
     }
 }
+
+

@@ -1,7 +1,5 @@
 package dat3.project.service;
 
-import dat3.project.Enum.DisciplineType;
-import dat3.project.Enum.ResultType;
 import dat3.project.dto.DisciplinDtoRequest;
 import dat3.project.dto.DisciplinDtoResponse;
 import dat3.project.entity.Disciplin;
@@ -75,15 +73,18 @@ public class DisciplinService {
 
     /**
      * Deletes a disciplin
+     *
      * @param id The id of the disciplin
      * @return A response entity
      */
 
     public ResponseEntity<Void> deleteDisciplin(int id) {
-        Disciplin disciplin = findDisciplinById(id);
+        Disciplin disciplin = disciplinRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Disciplin not found"));
         disciplinRepository.delete(disciplin);
         return ResponseEntity.ok().build();
     }
+
 
 
     /**

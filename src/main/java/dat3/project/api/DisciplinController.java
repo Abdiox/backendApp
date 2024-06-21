@@ -40,7 +40,7 @@ public class DisciplinController {
         return ResponseEntity.ok(response); // 200 OK
     }
 
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDisciplin(@PathVariable Integer id) {
         return disciplinService.deleteDisciplin(id);
     }
