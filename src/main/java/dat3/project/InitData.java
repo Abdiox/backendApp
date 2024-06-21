@@ -35,8 +35,15 @@ public class InitData implements CommandLineRunner {
         Participant participant1 = new Participant("abdiox", "Mand", 22, "Rødovre AtletikKlub");
         Participant participant2 = new Participant("Mendy", "Mand", 28, "Real Madrid AtletikKlub");
         Participant participant3 = new Participant("Mbappe", "Mand", 25, "PSG AtletikKlub");
+        Participant participant4 = new Participant("Yamal", "Mand", 9, "La Masia AtletikKlub");
+        Participant participant5 = new Participant("Musiala", "Mand", 15, "Bayern AtletikKlub");
+        Participant participant6 = new Participant("Hakan", "Mand", 19, "Inter AtletikKlub");
+        Participant participant7 = new Participant("Schmeicel", "Mand", 64, "Retired AtletikKlub");
 
-        participantRepository.saveAll(Arrays.asList(participant1, participant2, participant3));
+
+
+
+        participantRepository.saveAll(Arrays.asList(participant1, participant2, participant3, participant4, participant5, participant6, participant7));
 
         // Disciplines
         Disciplin disciplin1 = new Disciplin("100-meterløb", DisciplineType.LØB_100_METER, ResultType.TIME);
@@ -60,16 +67,25 @@ public class InitData implements CommandLineRunner {
         participant1.setDisciplins(new HashSet<>(Arrays.asList(disciplin1)));
         participant2.setDisciplins(new HashSet<>(Arrays.asList(disciplin2)));
         participant3.setDisciplins(new HashSet<>(Arrays.asList(disciplin3)));
+        participant4.setDisciplins(new HashSet<>(Arrays.asList(displin9)));
+        participant5.setDisciplins(new HashSet<>(Arrays.asList(displin10)));
+        participant6.setDisciplins(new HashSet<>(Arrays.asList(displin12)));
+        participant7.setDisciplins(new HashSet<>(Arrays.asList(disciplin13)));
 
 
-        participantRepository.saveAll(Arrays.asList(participant1, participant2, participant3));
+        participantRepository.saveAll(Arrays.asList(participant1, participant2, participant3, participant4, participant5, participant6));
 
         // Results
-        Result result1 = new Result(ResultType.TIME, LocalDateTime.now(), 19500, disciplin1, participant1); // 9.5 seconds for 100m
-        Result result2 = new Result(ResultType.TIME, LocalDateTime.now(), 25000, disciplin2, participant2);// 19.5 seconds for 200m
-        Result result3 = new Result(ResultType.TIME, LocalDateTime.now(), 30000, disciplin3, participant3); // 45 seconds for 400m
+        Result result1 = new Result(ResultType.TIME, LocalDateTime.now(), 19500, disciplin1, participant1);
+        Result result2 = new Result(ResultType.TIME, LocalDateTime.now(), 25000, disciplin2, participant2);
+        Result result3 = new Result(ResultType.TIME, LocalDateTime.now(), 30000, disciplin3, participant3);
+        Result result4 = new Result(ResultType.DISTANCE, LocalDateTime.now(), 500, displin9, participant4);
+        Result result5 = new Result(ResultType.DISTANCE, LocalDateTime.now(), 1000, displin10, participant5);
+        Result result6 = new Result(ResultType.DISTANCE, LocalDateTime.now(), 2000, displin12, participant6);
+        Result result7 = new Result(ResultType.POINTS, LocalDateTime.now(), 5000, disciplin13, participant6);
 
-        resultRepository.saveAll(Arrays.asList(result1, result2, result3));
+
+        resultRepository.saveAll(Arrays.asList(result1, result2, result3, result4, result5, result6, result7));
     }
 }
 
