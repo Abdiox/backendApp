@@ -56,12 +56,8 @@ public class ResultService {
      */
 
     public ResultDtoResponse addResult(ResultDtoRequest request) {
-        Participant participant = participantRepository.findById(request.getParticipantId())
-                .orElseThrow(() -> new RuntimeException("Participant not found"));
-        Disciplin disciplin = disciplinRepository.findById(request.getDisciplinId())
-                .orElseThrow(() -> new RuntimeException("Disciplin not found"));
-
-        Result newResult = new Result(request.getResultValue(), request.getDate(), request.getResultType(), disciplin, participant);
+        Result newResult = new Result();
+        updateResult(newResult, request);
         resultRepository.save(newResult);
         return new ResultDtoResponse(newResult);
     }
@@ -96,11 +92,15 @@ public class ResultService {
     }
 
     private void updateResult(Result result, ResultDtoRequest request) {
-        Participant participant = participantRepository.findById(request.getParticipantId()).orElseThrow(() ->
-                new RuntimeException("Participant not found"));
+        Participant participant = participantRepository.findById(request.getParticipantId())
+                .orElseThrow(() -> new RuntimeException("Participant not found"));
+        Disciplin disciplin = disciplinRepository.findById(request.getDisciplinId())
+                .orElseThrow(() -> new RuntimeException("Disciplin not found"));
+
         result.setParticipant(participant);
+        result.setDisciplin(disciplin);
+        result.setResultType(request.getResultType());
         result.setResultValue(request.getResultValue());
         result.setDate(request.getDate());
-        result.setResultType(request.getResultType());
     }
 }

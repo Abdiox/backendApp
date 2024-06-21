@@ -1,6 +1,8 @@
 package dat3.project.entity;
 
 import dat3.project.Enum.ResultType;
+import dat3.project.entity.Disciplin;
+import dat3.project.entity.Participant;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,11 +16,12 @@ public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int resultValue;
-    private LocalDateTime date;
 
     @Enumerated(EnumType.STRING)
     private ResultType resultType;
+
+    private LocalDateTime date;
+    private int resultValue;
 
     @ManyToOne
     @JoinColumn(name = "disciplin_id")
@@ -28,14 +31,4 @@ public class Result {
     @JoinColumn(name = "participant_id")
     private Participant participant;
 
-    public Result() {
-    }
-
-    public Result(int resultValue, LocalDateTime date, ResultType resultType, Disciplin disciplin, Participant participant) {
-        this.resultValue = resultValue;
-        this.date = date;
-        this.resultType = resultType;
-        this.disciplin = disciplin;
-        this.participant = participant;
-    }
 }
