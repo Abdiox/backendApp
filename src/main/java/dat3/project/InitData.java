@@ -82,7 +82,7 @@ public class InitData implements CommandLineRunner {
         Result result4 = new Result(ResultType.DISTANCE, LocalDateTime.now(), 500, displin9, participant4);
         Result result5 = new Result(ResultType.DISTANCE, LocalDateTime.now(), 1000, displin10, participant5);
         Result result6 = new Result(ResultType.DISTANCE, LocalDateTime.now(), 2000, displin12, participant6);
-        Result result7 = new Result(ResultType.POINTS, LocalDateTime.now(), 5000, disciplin13, participant6);
+        Result result7 = new Result(ResultType.POINTS, LocalDateTime.now(), 5000, disciplin13, participant7);
 
 
         resultRepository.saveAll(Arrays.asList(result1, result2, result3, result4, result5, result6, result7));
