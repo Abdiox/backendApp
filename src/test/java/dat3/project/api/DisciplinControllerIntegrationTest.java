@@ -2,6 +2,7 @@ package dat3.project.api;
 
 import dat3.project.Enum.ResultType;
 import dat3.project.dto.DisciplinDtoRequest;
+import dat3.project.entity.Disciplin;
 import dat3.project.repository.DisciplinRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,10 +32,6 @@ public class DisciplinControllerIntegrationTest {
 
     @Test
     void addDisciplin() throws Exception {
-        DisciplinDtoRequest request = new DisciplinDtoRequest();
-        request.setName("Test Disciplin");
-        request.setResultType(ResultType.valueOf("TIME"));
-
         mockMvc.perform(post("/disciplins")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"name\": \"Test Disciplin\", \"resultType\": \"TIME\"}"))
@@ -45,16 +42,11 @@ public class DisciplinControllerIntegrationTest {
 
     @Test
     void getAllDisciplins() throws Exception {
-        DisciplinDtoRequest request1 = new DisciplinDtoRequest();
-        request1.setName("Disciplin 1");
-        request1.setResultType(ResultType.valueOf("TIME"));
+        Disciplin disciplin1 = new Disciplin("Disciplin 1", null, ResultType.TIME);
+        Disciplin disciplin2 = new Disciplin("Disciplin 2", null, ResultType.DISTANCE);
 
-        DisciplinDtoRequest request2 = new DisciplinDtoRequest();
-        request2.setName("Disciplin 2");
-        request2.setResultType(ResultType.valueOf("DISTANCE"));
-
-        disciplinRepository.save(request1);
-        disciplinRepository.save(request2);
+        disciplinRepository.save(disciplin1);
+        disciplinRepository.save(disciplin2);
 
         mockMvc.perform(get("/disciplins"))
                 .andExpect(status().isOk())
@@ -65,11 +57,8 @@ public class DisciplinControllerIntegrationTest {
 
     @Test
     void deleteDisciplin() throws Exception {
-        DisciplinDtoRequest request = new DisciplinDtoRequest();
-        request.setName("Test Disciplin");
-        request.setResultType(ResultType.valueOf("TIME"));
-
-        int id = disciplinRepository.save(request).getId();
+        Disciplin disciplin = new Disciplin("Test Disciplin", null, ResultType.TIME);
+        int id = disciplinRepository.save(disciplin).getId();
 
         mockMvc.perform(delete("/disciplins/{id}", id))
                 .andExpect(status().isOk());
